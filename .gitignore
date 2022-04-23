@@ -1,0 +1,5 @@
+backend/api/__pycache__
+backend/sql/data/*
+!backend/sql/data/.gitkeep
+backend/sql/log/*
+!backend/sql/log/.gitkeep

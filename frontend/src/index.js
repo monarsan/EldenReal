@@ -2,25 +2,25 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Map from "./components/map";
 import Header from "./components/header";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import JimNightshade from './fonts/JimNightshade.ttf';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import JimNightshade from "./fonts/JimNightshade.ttf";
 
 const theme = createTheme({
   palette: {
     primary: {
-      light: '#80302b',
-      main: '#4f0000',
-      dark: '#300000',
-      contrastText: '#fff',
+      light: "#80302b",
+      main: "#4f0000",
+      dark: "#300000",
+      contrastText: "#fff",
     },
     secondary: {
-      light: '#cfcfc7',
-      main: '#9e9e96',
-      dark: '#707068',
-      contrastText: '#000',
+      light: "#cfcfc7",
+      main: "#9e9e96",
+      dark: "#707068",
+      contrastText: "#000",
     },
     typography: {
-      fontFamily: 'Jim Nightshade, Arial',
+      fontFamily: "Jim Nightshade, Arial",
     },
     components: {
       MuiCssBaseline: {

@@ -3,3 +3,4 @@ backend/sql/data/*
 !backend/sql/data/.gitkeep
 backend/sql/log/*
 !backend/sql/log/.gitkeep
+frontend/node_modules

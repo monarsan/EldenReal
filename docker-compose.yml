@@ -20,6 +20,8 @@ services:
       - 8080:8080
     volumes:
       - ./backend/api:/usr/app
+    depends_on:
+      - sql
 
   sql:
     image: mysql:8.0.27

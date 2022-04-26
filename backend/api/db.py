@@ -2,18 +2,14 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-host = "sql:3308"
-db_name = "sample_db"
-user = "mysqluser"
-password = "mysqlpass"
+DATABASE = 'postgresql'
+USER = 'admin'
+PASSWORD = 'admin'
+HOST = 'sql'
+PORT = '5432'
+DB_NAME = 'db'
 
-DATABASE = 'mysql://%s:%s@%s/%s?charset=utf8' % (
-    user,
-    password,
-    host,
-    db_name,
-)
-
+DATABASE = '{}://{}:{}@{}:{}/{}'.format(DATABASE, USER, PASSWORD, HOST, PORT, DB_NAME)
 engine = create_engine(
     DATABASE,
     encoding="utf-8"

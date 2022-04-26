@@ -1,5 +1,5 @@
 uvicorn[standard]
 fastapi
 jinja2
-mysqlclient
+psycopg2
 sqlalchemy

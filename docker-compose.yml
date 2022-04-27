@@ -20,25 +20,17 @@ services:
       - 8080:8080
     volumes:
       - ./backend/api:/usr/app
-    depends_on:
-      - sql
 
   sql:
-    image: mysql:8.0.27
+    build:
+      context: ./backend/sql
+      dockerfile: Dockerfile
     environment:
-      MYSQL_ROOT_PASSWORD: rootpass
-      MYSQL_DATABASE: sample_db
-      MYSQL_USER: mysqluser
-      MYSQL_PASSWORD: mysqlpass
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: db
     volumes:
-      - ./backend/sql/data:/var/lib/mysql
-      - ./backend/sql/cnf:/etc/mysql/conf.d
-      - ./backend/sql/log:/usr/local/mysql/data
+      - ./backend/sql/data:/var/lib/postgresql/data
     ports:
-      - 3308:3308
-    command: >
-          bash -c "
-          chmod 644 /etc/mysql/conf.d/*.cnf
-          && /entrypoint.sh mysqld --port 3308
-          "
+      - 5432:5432
     tty: true

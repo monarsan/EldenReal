@@ -16,14 +16,14 @@ def generate_authenticate_url():
 
     return f"{AUTHENTICATE_URL}?oauth_token={oauth_token}"
 
-def generate_authenticate_url_oauth2():
-    """
-        認証用URLを生成する。
-    """
-    scope = ["tweet.read", "users.read"]
-    oauth = OAuth2Session(TWITTER_CLIENT_ID, redirect_uri=CALLBACK_URL, scope=scope)
-    authorization_url, _ = oauth.authorization_url(AUTHENTICATE_URL_OAUTH2)
-    return authorization_url
+# def generate_authenticate_url_oauth2():
+#     """
+#         認証用URLを生成する。
+#     """
+#     scope = ["tweet.read", "users.read"]
+#     oauth = OAuth2Session(TWITTER_CLIENT_ID, redirect_uri=CALLBACK_URL, scope=scope)
+#     authorization_url, _ = oauth.authorization_url(AUTHENTICATE_URL_OAUTH2)
+#     return authorization_url
 
 def verify_oauth_token(oauth_token, oauth_verifier):
     """
@@ -40,17 +40,17 @@ def verify_oauth_token(oauth_token, oauth_verifier):
     else:
         return None
 
-def verify_oauth_token_oauth2(code):
-    scope = ["tweet.read"]
-    oauth = OAuth2Session(TWITTER_CLIENT_ID, redirect_uri=CALLBACK_URL, scope=scope)
-    token = oauth.fetch_token(TOKEN_URL_OAUTH2, code=code, client_secret=TWITTER_CLIENT_SECRET)
-    oauth = OAuth2Session(token=token)
-    res = oauth.get(USER_URL_OAUTH2)
-    if res.status_code == 200:
-        res = res.json()
-        return res["data"]["id"]
-    else:
-        return None 
+# def verify_oauth_token_oauth2(code):
+#     scope = ["tweet.read"]
+#     oauth = OAuth2Session(TWITTER_CLIENT_ID, redirect_uri=CALLBACK_URL, scope=scope)
+#     token = oauth.fetch_token(TOKEN_URL_OAUTH2, code=code, client_secret=TWITTER_CLIENT_SECRET)
+#     oauth = OAuth2Session(token=token)
+#     res = oauth.get(USER_URL_OAUTH2)
+#     if res.status_code == 200:
+#         res = res.json()
+#         return res["data"]["id"]
+#     else:
+#         return None 
 
 def get_twitter_screen_name(twitter_id):
     headers = {'Authorization': f'Bearer {TWITTER_BEARER_TOKEN}'}

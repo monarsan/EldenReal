@@ -5,3 +5,7 @@ backend/sql/data/*
 backend/sql/log/*
 !backend/sql/log/.gitkeep
 frontend/node_modules
+backend/api/crud/__pycache__
+backend/api/auth/__pycache__
+backend/api/schemas/__pycache__
+backend/api/config.py

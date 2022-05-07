@@ -3,3 +3,7 @@ fastapi
 jinja2
 psycopg2
 sqlalchemy
+python-jose[cryptography]
+python-multipart
+requests_oauthlib
+requests

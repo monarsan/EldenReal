@@ -1,9 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Map from "./components/map";
-import Header from "./components/header";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import JimNightshade from "./fonts/JimNightshade.ttf";
+import App from "./app";
 
 const theme = createTheme({
   palette: {
@@ -41,13 +40,7 @@ const theme = createTheme({
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <Header />
-      <div className="map-container">
-        <Map 
-          size={ { width: "100%", height: "100%" } }
-          center={ { lat: -34.397, lng: 150.644 } }
-        />
-      </div>
+      <App />
     </ThemeProvider>
   </React.StrictMode>
   ,document.getElementById("app")

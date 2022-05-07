@@ -3,6 +3,7 @@ from starlette.middleware.cors import CORSMiddleware
 from db import get_db, Base, engine
 import db_init
 import auth.twi_auth
+from crud import fixed_form, popup, comment
 app = FastAPI()
 
 app.add_middleware(
@@ -17,5 +18,10 @@ app.add_middleware(
 def hello(db=Depends(get_db)):
     return "Hello World"
 
+app.include_router(fixed_form.router)
+app.include_router(popup.router)
+app.include_router(comment.router)
+app.include_router(db_init.router)
+app.include_router(db_init.router)
 app.include_router(db_init.router)
 app.include_router(auth.twi_auth.router)

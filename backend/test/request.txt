@@ -1,6 +1,0 @@
-curl -X GET localhost:8080/init/db
-curl -X POST -H "Content-Type: application/json" -d '{"twitter_id": 1,"name": "monar"}' localhost:8080/api/user/create
-curl -X POST -H "Content-Type: application/json" -d '{"ok_good": 10}' localhost:8080/api/popup/create
-curl -X POST -H "Content-Type: application/json" -d '{"content":"This is", "ok_good": 13}' localhost:8080/api/fixed_form/create
-curl -X POST -H "Content-Type: application/json" -d '"user_id" : 1,"lat" : 10.4,"lng" : 80.0,"fixed_form_id" : 2,"fixed_form_content1" : "ramen","fixed_form_content2" : "good","popup_id" : 3' localhost:8080/api/comment/create
-

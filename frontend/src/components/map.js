@@ -1,5 +1,6 @@
 import React from "react";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import PostButton from "./button";
 
 const map_id = ["660c68bf4827712e"];
 const key = "AIzaSyBZTJ4yuVc6jdJFJoQ6ii3LfmU6Jz3WfQI";
@@ -13,8 +14,9 @@ function Map(props) {
         zoom={10}
         options={{ mapId: map_id[0] }}
       >
-        <></>
+          <PostButton />
       </GoogleMap>
+      
     </LoadScript>
   );
 }

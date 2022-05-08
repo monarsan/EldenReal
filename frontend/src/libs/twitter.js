@@ -42,3 +42,13 @@ export async function twitter_generate_url() {
   let twi_url = (await axios.get(url)).data;
   window.location.href = twi_url;
 }
+
+export async function is_authenticated () {
+  try {
+    await twitter_get_user_name();
+    return true;
+  }
+  catch (error) {
+    return false;
+  }
+}

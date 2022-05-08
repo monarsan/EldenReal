@@ -22,3 +22,9 @@ def get_fixed_form_by_id(id:int, db = Depends(get_db)):
     if db_fixed_form_by_id is None:
         raise HTTPException(status_code = 404, detail = "fixed_form not found")
     return db_fixed_form_by_id
+
+
+@router.get("/api/fixed_form/")
+def get_fixed_forms(db = Depends(get_db)):
+    db_fixed_forms = db.query(models.fixed_form.FixedForm).all()
+    return db_fixed_forms

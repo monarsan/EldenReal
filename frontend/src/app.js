@@ -1,8 +1,18 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Map from "./components/map";
 import Header from "./components/header";
+import { AddCommentDialog } from "./components/dialog";
+import { is_authenticated } from "./libs/twitter";
 
 const App = () => {
+  const [login, setLogin] = useState(false);
+
+  useEffect(() => {
+    is_authenticated().then((res) => {
+      setLogin(res);
+    });
+  }, []);
+
   return (
     <>
       <Header />
@@ -12,6 +22,7 @@ const App = () => {
           center={ { lat: -34.397, lng: 150.644 } }
         />
       </div>
+      <AddCommentDialog login={login}/>
     </>
   );
 };

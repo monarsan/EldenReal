@@ -34,9 +34,9 @@ def get_post_by_id(id:int, db = Depends(get_db)):
 
 
 @router.get("/api/comment/neighborhood/")
-def get_neighborhood_comment(lat:float, lng:float, db=Depends(get_db)):
+def get_neighborhood_comment(top:float, bottom:float, left:float, right:float, db=Depends(get_db)):
     db_neighbor_list = db.query(models.comment.Comment).\
-        filter(models.comment.Comment.lat - lat<0.0001, lat - models.comment.Comment.lat<0.0001 ).\
-        filter(models.comment.Comment.lng - lng<0.0001, lng - models.comment.Comment.lng<0.0001 ).\
+        filter(models.comment.Comment.lat < top, models.comment.Comment.lat > bottom ).\
+        filter(models.comment.Comment.lng >left, models.comment.Comment.lng<  right ).\
         limit(20).all()
     return db_neighbor_list

@@ -8,3 +8,10 @@ body {
     width: 100%;
     height: calc(100vh - 64px);
 }
+
+.fab-container {
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
+    z-index: 1;
+}

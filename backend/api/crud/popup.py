@@ -21,3 +21,8 @@ def get_popup_by_id(id:int, db = Depends(get_db)):
     if db_popup_by_id is None:
         raise HTTPException(status_code = 404, detail = "popup not found")
     return db_popup_by_id
+
+@router.get("/api/popup/")
+def get_popups(db = Depends(get_db)):
+    db_popups = db.query(models.popup.Popup).all()
+    return db_popups

@@ -1,0 +1,22 @@
+.popup-1 {
+    position: relative;
+    width: 560px;
+    padding: 30px 20px;
+    margin: calc( -50% + 90px) 0 0 -50%;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 15px;
+}
+.popup-1::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-top-color: #fff;
+}

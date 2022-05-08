@@ -1,16 +1,19 @@
 import React, {useState, useEffect} from "react";
-import { GoogleMap, LoadScript } from "@react-google-maps/api";
-import { useGoogleMap } from '@react-google-maps/api'
-
-const map_id = ["660c68bf4827712e"];
-const key = "AIzaSyBZTJ4yuVc6jdJFJoQ6ii3LfmU6Jz3WfQI";
+import { GoogleMap, LoadScript, Marker, OverlayView } from "@react-google-maps/api";
+import { useGoogleMap } from "@react-google-maps/api";
+import { geturl } from "../libs/api";
+import axios from "axios";
+import { Popup } from "./popup";
+import {Box, CircularProgress} from "@mui/material";
+import { PosMarker } from "./marker";
+import { key, map_id } from "../env";
 
 function Map(props) {
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
   const options = {
     enableHighAccuracy: true,
-    timeout: 5000,
+    timeout: 10000,
     maximumAge: 0
   };
 
@@ -31,36 +34,68 @@ function Map(props) {
           zoom={10}
           options={{ mapId: map_id[0] }}
         >
-          <MapContainer />
+          <Comments />
+          <PosMarker />
         </GoogleMap>
       </LoadScript>
     );
   } else {
-    return null;
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" width="100%" height="100%">
+        <CircularProgress />
+      </Box>
+    );
   }
 }
 
-function MapContainer(props) {
+function Comments(props) {
   const map = useGoogleMap();
-  const [lat, setLat] = useState(null);
-  const [lng, setLng] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [lastcalled, setLastCalled] = useState(0);
+
+  const getComments = async () => {
+    if (map) {
+      setLastCalled( (oldcalled) => {
+        if (oldcalled < Date.now() - 250) {
+          const bounds = map.getBounds();
+          if (bounds) {
+            const ne = bounds.getNorthEast();
+            const sw = bounds.getSouthWest();
+            const api_endpoint = geturl() + `/api/comment/neighborhood/?top=${ne.lat()}&right=${ne.lng()}&bottom=${sw.lat()}&left=${sw.lng()}`;
+            axios.get(api_endpoint).then((res) => {
+              setComments(res.data);
+              console.log(res.data);
+            }).catch((err) => {
+              console.log(err);
+            });
+          }
+          return Date.now();
+        }
+        return oldcalled;
+      });
+    }
+  };
 
   useEffect(() => {
     if (map) {
-      map.addListener("center_changed", (event) => {
-        setLat(map.getCenter().lat());
-        setLng(map.getCenter().lng());
+      map.addListener("bounds_changed", (event) => {
+        getComments();
       });
     }
-  }, [map]);
+  }, []);
 
-  useEffect(() => {
-    if (lat && lng) {
-      console.log(map.getBounds());
-    }
-  }, [lat, lng]);
   return (
-    <></>
+    comments.map((comment) => {
+      return (
+        <OverlayView
+          key={comment.id}
+          position={{ lat: comment.lat, lng: comment.lng }}
+          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+        >
+          <Popup comment={comment} />
+        </OverlayView>
+      );
+    })
   );
 }
 
